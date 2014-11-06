@@ -15,7 +15,7 @@ RequestExecutionLevel admin
 
 Function WriteRegistry
 	WriteRegStr HKCR  "Directory\Shell" "" "none"
-	WriteRegStr HKCR  "Directory\Shell\Junction" "" "Create Junction Here"
+	WriteRegStr HKCR  "Directory\Shell\Junction" "" "Create Junction to this folder..."
     WriteRegStr HKCR  "Directory\Shell\Junction" "Position" "bottom"
 	WriteRegStr HKCR  "Directory\Shell\Junction\command" "" "$\"$INSTDIR\Junction.exe$\" $\"%V$\""
 FunctionEnd

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
@@ -16,9 +16,47 @@ namespace Junction
         {
 
             Application.EnableVisualStyles();
+
             if (args.Length == 0)
             {
-                MessageBox.Show("Usage : Junction.exe <SourceDirectory>", "Junction Usage", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Usage : Junction.exe [/F] <SourceDirectory/File>", "Junction Usage", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (args[0] == "/F")
+            {
+                string sourceFile = string.Join(" ", args, 1, args.Length-1);
+                if (System.IO.File.Exists(sourceFile)) 
+                {
+                    
+                    System.Windows.Forms.SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.FileName = System.IO.Path.GetFileName(sourceFile);
+                    saveFileDialog.Title = "Save a reference to " + sourceFile ;
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+
+                        if (System.IO.File.Exists(saveFileDialog.FileName))
+                        {
+                            MessageBox.Show("Target file already exists : " + saveFileDialog.FileName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            
+                            string command = "mklink \"" + saveFileDialog.FileName + "\" \"" + sourceFile + "\"";
+                            ProcessStartInfo process = new ProcessStartInfo("cmd.exe", "/c " + command);
+                            process.CreateNoWindow = true;
+                            process.UseShellExecute = true;
+                            process.Verb = "runas";
+                            Process.Start(process);
+                            Process.Start("explorer.exe", System.IO.Path.GetDirectoryName(saveFileDialog.FileName));
+
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Invalid File : " + sourceFile, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {

@@ -8,7 +8,7 @@
 !define INSTALLER_NAME "Junction_Installer.exe"
 !define MAIN_APP_EXE "Junction.exe"Name "Junction Installer"
 
-OutFile "Junction_Installer.exe"
+OutFile "..\bin\Junction_Installer.exe"
 LicenseData "LICENCE.txt"
 InstallDir $PROGRAMFILES\Junction
 RequestExecutionLevel admin
@@ -18,6 +18,10 @@ Function WriteRegistry
 	WriteRegStr HKCR  "Directory\Shell\Junction" "" "Create Junction to this folder..."
     WriteRegStr HKCR  "Directory\Shell\Junction" "Position" "bottom"
 	WriteRegStr HKCR  "Directory\Shell\Junction\command" "" "$\"$INSTDIR\Junction.exe$\" $\"%V$\""
+	WriteRegStr HKCR  "Directory\*" "" "none"
+	WriteRegStr HKCR  "Directory\*\Junction" "" "Create Junction to this folder..."
+    WriteRegStr HKCR  "Directory\*\Junction" "Position" "bottom"
+	WriteRegStr HKCR  "Directory\*\Junction\command" "" "$\"$INSTDIR\Junction.exe$\" /F $\"%V$\""
 FunctionEnd
 
 Page license 
@@ -27,6 +31,6 @@ UninstPage instfiles
 
 Section
 	SetOutPath $INSTDIR
-	File "Junction.exe"
+	File "..\Junction\bin\Release\Junction.exe"
     Call WriteRegistry
 SectionEnd

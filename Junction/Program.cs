@@ -31,14 +31,12 @@ namespace Junction
                     saveFileDialog.Title = "Save a reference to " + sourceFile;
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-
                         if (File.Exists(saveFileDialog.FileName))
                         {
                             MessageBox.Show("Target file already exists : " + saveFileDialog.FileName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {
-
                             string command = "mklink \"" + saveFileDialog.FileName + "\" \"" + sourceFile + "\"";
                             ProcessStartInfo process = new ProcessStartInfo("cmd.exe", "/c " + command);
                             process.CreateNoWindow = true;
@@ -66,7 +64,6 @@ namespace Junction
                     saveFileDialog.Title = "Save a reference to " + sourceDirectory ;
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-
                         if (Directory.Exists(saveFileDialog.FileName))
                         {
                             MessageBox.Show("Target directory already exists : " + saveFileDialog.FileName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -77,7 +74,7 @@ namespace Junction
                             ProcessStartInfo process = new ProcessStartInfo("cmd.exe", "/c " + command);
                             process.CreateNoWindow = true;
                             Process.Start(process);
-                            Process.Start("explorer.exe", $"/root,\"{saveFileDialog.FileName}\"");
+                            Process.Start("explorer.exe", $"/root,\"{Path.GetDirectoryName(saveFileDialog.FileName)}\"");
                         }
                     }
                 }

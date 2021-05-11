@@ -1,15 +1,15 @@
 !define APP_NAME "Junction"
 !define COMP_NAME "PeeWeeK.NET"
 !define WEB_SITE "http://www.peeweek.net"
-!define VERSION "1.10.00.00"
+!define VERSION "1.10.10.00"
 !define COPYRIGHT "WTF-PL"
 !define DESCRIPTION "Junction"
 !define LICENSE_TXT "LICENCE.txt"
-!define INSTALLER_NAME "Junction Installer 1.1.0.exe"
+!define INSTALLER_NAME "Junction Installer 1.1.1.exe"
 !define MAIN_APP_EXE "Junction.exe"
 
 Name "Junction Installer"
-OutFile "..\Junction Installer 1.1.0.exe"
+OutFile "..\Junction Installer 1.1.1.exe"
 LicenseData "LICENCE.txt"
 InstallDir $PROGRAMFILES\Junction
 RequestExecutionLevel admin

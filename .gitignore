@@ -215,3 +215,4 @@ pip-log.txt
 .mr.developer.cfg
 Installer/Junction.exe
 Installer/Junction_Installer.exe
+*.exe
